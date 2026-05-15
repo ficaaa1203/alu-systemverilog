@@ -16,7 +16,7 @@ run: build
 	$(VVP) $(OUT)
 
 wave: run
-	open -a gtkwave alu.vcd
+	code alu.vcd
 
 clean:
 	rm -f $(OUT) alu.vcd
