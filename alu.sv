@@ -30,12 +30,12 @@ module alu (
     wire signed [15:0] mul_full = A_s * B_s;
     wire [7:0]         div_val  = (B == 8'b0) ? 8'hFF : (A_s / B_s);
 
-    // Truncated 8-bit results (computed outside always_comb)
+    // 8-bit results
     wire [7:0] add_res = add_full[7:0];
     wire [7:0] sub_res = sub_full[7:0];
     wire [7:0] mul_res = mul_full[7:0];
 
-    // Sign bits and overflow detection (computed outside always_comb)
+    // Sign bits and overflow detection
     wire add_sign = add_full[7];
     wire sub_sign = sub_full[7];
     wire add_ovf  = (A[7] == B[7]) && (add_sign != A[7]);
@@ -44,7 +44,7 @@ module alu (
     wire mul_hi_all_one  = (mul_full[15:7] == 9'b111111111);
     wire mul_ovf  = !(mul_hi_all_zero || mul_hi_all_one);
 
-    // Shift amount (lower 3 bits of B)
+    // Shift amount
     wire [2:0] shamt = B[2:0];
 
     always_comb begin
